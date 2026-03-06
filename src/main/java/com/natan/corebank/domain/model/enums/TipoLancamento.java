@@ -1,17 +1,18 @@
 package com.natan.corebank.domain.model.enums;
 
-public enum TipoCliente {
-    
-    PF("Pessoa Física"),
-    PJ("Pessoa Jurídica");
+public enum TipoLancamento {
+
+    CREDITO("Entrada"),
+    DEBITO("Saída");
 
     private final String descricao;
 
-    TipoCliente(String descricao) {
+    TipoLancamento(String descricao) {
         this.descricao = descricao;
     }
 
     public String getDescricao() {
         return descricao;
     }
+    
 }
