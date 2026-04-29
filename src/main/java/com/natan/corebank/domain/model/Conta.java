@@ -21,13 +21,14 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "Conta")
+@Table(name = "conta")
 @Entity
 @Getter
 @Setter
@@ -71,6 +72,26 @@ public class Conta {
     @PrePersist
     public void onCreate() {
         this.dataCadastro = LocalDateTime.now();
+    }
+
+    public void depositar(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("O valor do depósito deve ser positivo.");
+        }
+
+        this.saldo = this.saldo.add(valor);
+    }
+
+    public void sacar(BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Valor inválido");
+        }
+
+        if (this.saldo.compareTo(valor) < 0) {
+            throw new IllegalArgumentException("Saldo insuficiente");
+        }
+
+        this.saldo = this.saldo.subtract(valor);
     }
 
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)

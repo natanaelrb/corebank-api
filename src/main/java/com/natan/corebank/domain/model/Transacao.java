@@ -35,8 +35,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Inheritance(strategy = InheritanceType.JOINED) // Define a herança
-public abstract class Transacao { // 'abstract' evita criar uma transação genérica
-
+public class Transacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
