@@ -3,7 +3,5 @@ package com.natan.corebank.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ClientColtroller {
-
-    
+public class ClientController {
 }
