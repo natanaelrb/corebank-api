@@ -3,7 +3,6 @@ package com.natan.corebank;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
 public class CorebankApplication {
 
