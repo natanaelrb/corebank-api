@@ -69,14 +69,13 @@ public class Transacao {
     private Conta contaDestino;
 
     @PrePersist
-    public void onCreate() {
-        this.dataHora = LocalDateTime.now();
-    }
+    public void prePersist() {
+    this.dataHora = LocalDateTime.now();
 
-    @PrePersist
-    public void gerarReferencia() {
-        if (this.referenciaExterna == null) {
-            this.referenciaExterna = UUID.randomUUID().toString();
+    if (this.referenciaExterna == null) {
+        this.referenciaExterna = UUID.randomUUID().toString();
+        
         }
+
     }
 }

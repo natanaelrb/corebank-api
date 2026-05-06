@@ -94,10 +94,10 @@ public class Conta {
         this.saldo = this.saldo.subtract(valor);
     }
 
-    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
-    private List<Transacao> transacoes = new ArrayList<>();
+    @OneToMany(mappedBy = "contaOrigem", cascade = CascadeType.ALL)
+    private List<Transacao> transacoesEnviadas = new ArrayList<>();
 
-    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
-    private List<ChavePix> chavesPix = new ArrayList<>();
+    @OneToMany(mappedBy = "contaDestino", cascade = CascadeType.ALL)
+    private List<Transacao> transacoesRecebidas = new ArrayList<>();
 
 }
