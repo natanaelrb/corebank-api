@@ -31,3 +31,16 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Banco H2
+*.mv.db
+*.trace.db
+
+# Build
+target/
+
+# VSCode
+.vscode/
+
+# IntelliJ
+.idea/
