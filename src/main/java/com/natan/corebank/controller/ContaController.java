@@ -1,5 +1,7 @@
 package com.natan.corebank.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,12 +21,24 @@ public class ContaController {
     }
 
     @PostMapping("/transferir")
-    public void transferir(@RequestBody TransferenciaRequest request) {
+    public ResponseEntity<String> transferir(@RequestBody TransferenciaRequest request) {
 
+    try {
         contaService.transferir(
             request.getNumeroOrigem(),
             request.getNumeroDestino(),
             request.getValor()
         );
+
+        return ResponseEntity.ok("Transferência realizada com sucesso");
+        
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+        
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+
+    }
+
     }
 }

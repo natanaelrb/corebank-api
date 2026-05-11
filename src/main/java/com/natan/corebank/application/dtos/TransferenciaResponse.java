@@ -11,10 +11,11 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransferenciaRequest {
+public class TransferenciaResponse {
+    
+    private String mensagem;
+    private BigDecimal saldoOrigem;
+    private BigDecimal saldoDestino;
 
-    private String numeroOrigem;
-    private String numeroDestino;
-    private BigDecimal valor;
-
+   
 }

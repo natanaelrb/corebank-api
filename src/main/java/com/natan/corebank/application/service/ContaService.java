@@ -11,6 +11,8 @@ import com.natan.corebank.domain.model.enums.TipoTransacao;
 import com.natan.corebank.infrastructure.Repository.ContaRepository;
 import com.natan.corebank.infrastructure.Repository.TransacaoRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ContaService {
 
@@ -22,7 +24,12 @@ public class ContaService {
         this.transacaoRepository = transacaoRepository;
     }
 
+    @Transactional
     public void transferir(String numeroOrigem, String numeroDestino, BigDecimal valor) {
+
+    if (valor.compareTo(BigDecimal.ZERO) <= 0) {
+        throw new IllegalArgumentException("Valor inválido");
+    }
 
     Conta origem = contaRepository.findByNumeroConta(numeroOrigem)
             .orElseThrow(() -> new RuntimeException("Conta origem não encontrada"));
@@ -32,6 +39,14 @@ public class ContaService {
 
     if (origem.equals(destino)) {
         throw new IllegalArgumentException("Não pode transferir para a mesma conta");
+    }
+
+    if (!origem.isAtiva() || !destino.isAtiva()) {
+        throw new RuntimeException("Conta inativa");
+    }
+
+    if (origem.getSaldo().compareTo(valor) < 0) {
+        throw new RuntimeException("Saldo insuficiente");
     }
 
     origem.sacar(valor);
