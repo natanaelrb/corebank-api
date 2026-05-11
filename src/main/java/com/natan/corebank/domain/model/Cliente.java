@@ -57,7 +57,7 @@ public class Cliente {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_cliente", nullable = false, length = 2)
-    private TipoCliente tipo;
+    private TipoCliente tipoCliente;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
